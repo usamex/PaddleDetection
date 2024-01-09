@@ -1,0 +1,20 @@
+metric: COCO
+num_classes: 6
+
+TrainDataset:
+  !COCODataSet
+    image_dir: train_sliced
+    anno_path: /content/dataset/train_sliced/sliced_coco.json_coco.json
+    dataset_dir: /content/dataset
+    data_fields: ['image', 'gt_bbox', 'gt_class', 'is_crowd']
+
+EvalDataset:
+  !COCODataSet
+    image_dir: validation_sliced
+    anno_path: /content/dataset/validation_sliced/sliced_coco.json_coco.json
+    dataset_dir: /content/dataset
+
+TestDataset:
+  !ImageFolder
+    anno_path: /content/dataset/test_sliced/sliced_coco.json_coco.json
+    dataset_dir: /content/dataset

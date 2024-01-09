@@ -1,5 +1,5 @@
 _BASE_: [
-  './_base_/visdrone_sliced_640_025_detection.yml',
+  './_base_/tempus_sliced_640_025_detection.yml',
   '../runtime.yml',
   '../ppyoloe/_base_/optimizer_300e.yml',
   '../ppyoloe/_base_/ppyoloe_crn.yml',
@@ -7,9 +7,9 @@ _BASE_: [
 ]
 log_iter: 100
 snapshot_epoch: 10
-weights: output/ppyoloe_crn_l_80e_sliced_visdrone_640_025/model_final
+weights: output/ppyoloe_crn_l_80e_sliced_tempus_640_025/model_final
 
-pretrain_weights: https://paddledet.bj.bcebos.com/models/ppyoloe_crn_l_300e_coco.pdparams
+pretrain_weights: https://paddledet.bj.bcebos.com/models/ppyoloe_crn_l_80e_sliced_visdrone_640_025.pdparams
 depth_mult: 1.0
 width_mult: 1.0
 
@@ -25,7 +25,7 @@ TestReader:
   fuse_normalize: True
 
 
-epoch: 80
+epoch: 100
 LearningRate:
   base_lr: 0.01
   schedulers:
@@ -43,16 +43,3 @@ PPYOLOEHead:
     keep_top_k: 500
     score_threshold: 0.01
     nms_threshold: 0.6
-
-
-EvalDataset:
-  !COCODataSet
-    image_dir: val_images_640_025
-    anno_path: val_640_025.json
-    dataset_dir: dataset/visdrone_sliced
-
-# EvalDataset:
-#   !COCODataSet
-#     image_dir: VisDrone2019-DET-val
-#     anno_path: val.json
-#     dataset_dir: dataset/visdrone
